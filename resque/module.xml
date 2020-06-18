@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="http://jelix.org/ns/module/1.0">
+    <info id="resque@jelix.org" name="news">
+        <version date="2020-06-18">0.1.0-pre</version>
+        <label lang="en_US">Resque module</label>
+        <description lang="en_US"></description>
+        <license>MIT</license>
+        <copyright>2020 Laurent Jouanneau</copyright>
+    </info>
+    <dependencies>
+        <jelix minversion="1.7.0-beta.5" maxversion="1.7.*"/>
+    </dependencies>
+</module>
