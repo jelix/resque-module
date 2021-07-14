@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="http://jelix.org/ns/module/1.0">
+    <info id="test-app@jelix.org" name="test">
+        <version date="2021-07-10">0.0.1</version>
+    </info>
+    <dependencies>
+        <jelix minversion="1.7.2" maxversion="1.7.*"/>
+    </dependencies>
+</module>

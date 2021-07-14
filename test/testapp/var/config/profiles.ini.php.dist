@@ -1,0 +1,16 @@
+;<?php die(''); ?>
+;for security reasons, don't remove or modify the first line
+[jdb]
+
+; name of the default profil to use for any connection
+default=test
+
+[jdb:test]
+driver="pgsql"
+host=postgresql
+database=resque
+user=usertest
+password=userpass
+persistent=on
+force_encoding=on
+

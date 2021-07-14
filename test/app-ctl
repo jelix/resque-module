@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+COMMAND="$1"
+shift
+
+if [ "$APPBRANCH" == "" ]; then
+  #export APPBRANCH=$(git rev-parse --abbrev-ref HEAD)
+  export APPBRANCH=any
+fi
+
+if [ "$COMMAND" == "" ]; then
+    echo "Error: command is missing"
+    echo "Possible commands: clean-tmp, reset, install, rights, composer-install, composer-update"
+    echo "pgsql, shell, shellroot"
+    exit 1;
+fi
+
+PHP_CONTAINER=jelix-resque-${APPBRANCH}-php
+PG_CONTAINER=jelix-resque-${APPBRANCH}-pg
+
+case $COMMAND in
+    clean-tmp)
+        docker exec -t -i $PHP_CONTAINER appctl.sh clean_tmp;;
+    reset)
+        docker exec -t -i $PHP_CONTAINER appctl.sh reset;;
+    install)
+        docker exec -t -i $PHP_CONTAINER appctl.sh install;;
+    rights)
+        docker exec -t -i $PHP_CONTAINER appctl.sh rights;;
+    composer-install)
+        docker exec -t -i $PHP_CONTAINER appctl.sh composer_install;;
+    composer-update)
+        docker exec -t -i $PHP_CONTAINER appctl.sh composer_update;;
+    #unittests)
+    #    docker exec -t -i $PHP_CONTAINER appctl.sh unittests;;
+    pgsql)
+       docker exec -it --user postgres -e PGPASSWORD="userpass" $PG_CONTAINER psql --username=usertest resque
+       ;;
+    shell)
+       docker exec -it --user usertest $PHP_CONTAINER  /bin/sh -l;;
+    shellroot)
+       docker exec -it $PHP_CONTAINER  /bin/sh  -l;;
+    *)
+        echo "wrong command"
+        exit 2
+        ;;
+esac
+
+
