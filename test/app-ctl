@@ -37,9 +37,9 @@ case $COMMAND in
        docker exec -it --user postgres -e PGPASSWORD="userpass" $PG_CONTAINER psql --username=usertest resque
        ;;
     shell)
-       docker exec -it --user usertest $PHP_CONTAINER  /bin/sh -l;;
+       docker exec -it --user usertest $PHP_CONTAINER  /bin/bash -l;;
     shellroot)
-       docker exec -it $PHP_CONTAINER  /bin/sh  -l;;
+       docker exec -it $PHP_CONTAINER  /bin/bash  -l;;
     *)
         echo "wrong command"
         exit 2

@@ -14,3 +14,18 @@ password=userpass
 persistent=on
 force_encoding=on
 
+[resque]
+
+[resque:default]
+redis_host=redis
+;redis_port=6379
+;redis_password=
+;redis_user=
+redis_db=1
+;redis_prefix=
+worker_count=1
+queue=resquetests
+;logging=off
+;verbose=off
+;blocking=off
+;interval=5
