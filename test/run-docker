@@ -15,15 +15,13 @@ APP_USER_ID=${APP_USER_ID:-$(id -u)}
 APP_GROUP_ID=${APP_GROUP_ID:-$(id -g)}
 APP_WEB_PORT=${APP_WEB_PORT:-8032}
 APP_PGSQL_PORT=${APP_PGSQL_PORT:-8553}
+COMPOSE_PROJECT_NAME=jelix-resque-${APPBRANCH}-tests
 End-of-env
-
-DOCK_COMPOSE_OPTIONS="--env-file .env -p jelix-resque-${APPBRANCH}-tests"
-
 
 if [ "$CMD" == "reset" ]; then
     # Stop/Remove containers
-    docker-compose $DOCK_COMPOSE_OPTIONS rm -sfv || true
-    docker image rm jelix-resque-${APPBRANCH}-tests_ || true
+    docker-compose rm -sfv || true
+    docker image rm jelix-resque-${APPBRANCH}-tests || true
 
     # Clean postgres volume
     docker volume rm "jelix-resque_${APPBRANCH}_pg_data" || true
@@ -34,4 +32,4 @@ else
   shift
 fi
 
-docker-compose $DOCK_COMPOSE_OPTIONS $CMD "$@"
+docker-compose $CMD "$@"

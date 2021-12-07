@@ -1,7 +1,7 @@
 #!/bin/bash
-APPDIR="/jelixapp/test/testapp"
-APP_USER=usertest
-APP_GROUP=grouptest
+APPDIR="/app/test/testapp"
+APP_USER=userphp
+APP_GROUP=groupphp
 
 COMMAND="$1"
 
@@ -91,22 +91,6 @@ function setRights() {
 
 }
 
-function composerInstall() {
-    if [ -f $APPDIR/composer.lock ]; then
-        rm -f $APPDIR/composer.lock
-    fi
-    composer install --prefer-dist --no-progress --no-ansi --no-interaction --working-dir=$APPDIR
-    chown -R $APP_USER:$APP_GROUP $APPDIR/vendor $APPDIR/composer.lock
-}
-
-function composerUpdate() {
-    if [ -f $APPDIR/composer.lock ]; then
-        rm -f $APPDIR/composer.lock
-    fi
-    composer update --prefer-dist --no-progress --no-ansi --no-interaction --working-dir=$APPDIR
-    chown -R $APP_USER:$APP_GROUP $APPDIR/vendor $APPDIR/composer.lock
-}
-
 function launch() {
     if [ ! -f $APPDIR/var/config/profiles.ini.php ]; then
         cp $APPDIR/var/config/profiles.ini.php.dist $APPDIR/var/config/profiles.ini.php
@@ -117,7 +101,7 @@ function launch() {
     chown -R $APP_USER:$APP_GROUP $APPDIR/var/config/profiles.ini.php $APPDIR/var/config/localconfig.ini.php
 
     if [ ! -d $APPDIR/vendor ]; then
-      composerInstall
+      /bin/helpers.sh composer-install $APPDIR
     fi
 
     launchInstaller
@@ -137,9 +121,9 @@ case $COMMAND in
     rights)
         setRights;;
     composer_install)
-        composerInstall;;
+        /bin/helpers.sh composer-install $APPDIR;;
     composer_update)
-        composerUpdate;;
+        /bin/helpers.sh composer-update $APPDIR;;
     *)
         echo "wrong command"
         exit 2
