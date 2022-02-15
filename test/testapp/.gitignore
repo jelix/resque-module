@@ -14,3 +14,4 @@ var/config/liveconfig.ini.php
 vendor/*
 composer.lock
 .env
+.phpunit.result.cache

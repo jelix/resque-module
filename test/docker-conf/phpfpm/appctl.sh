@@ -4,6 +4,7 @@ APP_USER=userphp
 APP_GROUP=groupphp
 
 COMMAND="$1"
+shift
 
 if [ "$COMMAND" == "" ]; then
     echo "Error: command is missing"
@@ -124,6 +125,13 @@ case $COMMAND in
         /bin/helpers.sh composer-install $APPDIR;;
     composer_update)
         /bin/helpers.sh composer-update $APPDIR;;
+    unit-tests)
+       UTCMD="cd $APPDIR/units/ && ../vendor/bin/phpunit $@"
+       su $APP_USER -c "$UTCMD"
+      ;;
+    restart-worker)
+      supervisorctl restart resque-server
+      ;;
     *)
         echo "wrong command"
         exit 2

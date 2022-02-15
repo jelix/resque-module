@@ -10,12 +10,10 @@
 
 namespace Jelix\Resque\Command;
 
-use Jelix\Resque\ResqueConfig;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
-class ResqueCommand extends \Jelix\Scripts\ModuleCommandAbstract
+use Jelix\Resque\ResqueFactory;
+
+class ResqueCommand extends ResqueCommandAbstract
 {
     protected function configure()
     {
@@ -32,18 +30,13 @@ class ResqueCommand extends \Jelix\Scripts\ModuleCommandAbstract
         parent::configure();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+
+    protected function getResqueFactory()
     {
-
-        $profile = \jProfiles::get('resque', 'default');
-
-        $config = new ResqueConfig($profile);
-        $config->prepareEnvironment();
-
-        // FIXME load tasks classes
-
-        $a = new \ReflectionClass('Resque');
-        $resqueBin = dirname($a->getFileName()).'/../bin/resque';
-        include($resqueBin);
+        // initialize our own factory to jobs
+        $factory = new ResqueFactory();
+        $factory->registerModuleJobs($this->resqueConfig->getQueue());
+        return $factory;
     }
+
 }

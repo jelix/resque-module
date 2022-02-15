@@ -99,9 +99,26 @@ class ResqueConfig {
 
         putenv("LOGGING=".($profile['logging']?1:0));
         putenv("VERBOSE=".($profile['verbose']?1:0));
-        putenv("VVERBOSE=0");
+        putenv("VVERBOSE=".($profile['verbose']>1?1:0));
         putenv("BLOCKING=".($profile['blocking']?1:0));
         putenv("INTERVAL=".$profile['interval']);
+    }
+
+    /**
+     * Initialize the Resque backend for Resque client
+     *
+     * to be called by resque client.
+     */
+    public function prepareResqueBackend()
+    {
+
+        \Resque::setBackend($this->dsn);
+    }
+
+
+    public function getQueue()
+    {
+        return $this->profile['queue'];
     }
 
 }

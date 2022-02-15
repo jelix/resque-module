@@ -11,12 +11,13 @@ fi
 if [ "$COMMAND" == "" ]; then
     echo "Error: command is missing"
     echo "Possible commands: clean-tmp, reset, install, rights, composer-install, composer-update"
-    echo "pgsql, shell, shellroot"
+    echo "pgsql, shell, shellroot, restart-worker, unit-tests"
     exit 1;
 fi
 
 PHP_CONTAINER=jelix-resque-${APPBRANCH}-php
 PG_CONTAINER=jelix-resque-${APPBRANCH}-pg
+REDIS_CONTAINER=jelix-resque-${APPBRANCH}-redis
 
 case $COMMAND in
     clean-tmp)
@@ -31,15 +32,20 @@ case $COMMAND in
         docker exec -t -i $PHP_CONTAINER appctl.sh composer_install;;
     composer-update)
         docker exec -t -i $PHP_CONTAINER appctl.sh composer_update;;
-    #unittests)
-    #    docker exec -t -i $PHP_CONTAINER appctl.sh unittests;;
+    unit-tests)
+        docker exec -t -i $PHP_CONTAINER appctl.sh unit-tests $@;;
     pgsql)
        docker exec -it --user postgres -e PGPASSWORD="userpass" $PG_CONTAINER psql --username=usertest resque
        ;;
+    redis)
+      docker exec -it $REDIS_CONTAINER redis-cli
+      ;;
     shell)
        docker exec -it --user userphp $PHP_CONTAINER  /bin/bash -l;;
     shellroot)
        docker exec -it $PHP_CONTAINER  /bin/bash  -l;;
+     restart-worker)
+       docker exec -t -i $PHP_CONTAINER appctl.sh restart-worker;;
     *)
         echo "wrong command"
         exit 2

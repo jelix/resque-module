@@ -6,4 +6,7 @@
     <dependencies>
         <jelix minversion="1.7.2" maxversion="1.7.*"/>
     </dependencies>
+    <autoload>
+        <psr4 namespace="\Jelix\ResqueTest" dir="lib/"/>
+    </autoload>
 </module>

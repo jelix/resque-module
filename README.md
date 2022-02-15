@@ -31,5 +31,7 @@ php yourapp/install/installer.php
 Usage
 =====
 
-FIXME.
+* [Implementing jobs](doc/implementing_jobs.md) which will execute asynchronous tasks.
+* [configuring and launching workers](doc/worker.md) which will launch jobs
+* [launching and managing jobs](doc/launching_jobs.md) from the client code.
 

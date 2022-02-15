@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <events xmlns="http://jelix.org/ns/events/1.0">
-    <listener name="adminui">
+    <listener name="testListener">
+        <event name="ResqueRegisterJobClasses" />
     </listener>
 </events>
