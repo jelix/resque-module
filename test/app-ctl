@@ -23,7 +23,9 @@ case $COMMAND in
     clean-tmp)
         docker exec -t -i $PHP_CONTAINER appctl.sh clean_tmp;;
     reset)
-        docker exec -t -i $PHP_CONTAINER appctl.sh reset;;
+        docker exec -it --user postgres -e PGPASSWORD="userpass" $PG_CONTAINER psql --username=usertest  -c "drop table if exists resque_jobs cascade;" resque
+        docker exec -t -i $PHP_CONTAINER appctl.sh reset
+        ;;
     install)
         docker exec -t -i $PHP_CONTAINER appctl.sh install;;
     rights)

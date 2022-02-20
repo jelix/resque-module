@@ -11,6 +11,7 @@
 namespace Jelix\Resque\Command;
 
 use Jelix\Resque\ResqueConfig;
+use Jelix\Resque\Worker\JobStatusManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -49,6 +50,18 @@ abstract class ResqueCommandAbstract extends \Jelix\Scripts\ModuleCommandAbstrac
         // set our own factory to jobs
         \Resque_Event::listen('afterFork', function($job) use($factory) {
             $job->setJobFactory($factory);
+        });
+
+        \Resque_Event::listen('beforePerform', function(\Resque_Job $job)  {
+            JobStatusManager::updateStatusToStart($job);
+        });
+
+        \Resque_Event::listen('afterPerform', function(\Resque_Job $job)  {
+            JobStatusManager::updateStatusToSuccess($job);
+        });
+
+        \Resque_Event::listen('onFailure', function($exception, \Resque_Job $job)  {
+            JobStatusManager::updateStatusToFail($job, $exception);
         });
 
         $a = new \ReflectionClass('Resque');
