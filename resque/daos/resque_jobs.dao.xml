@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dao xmlns="http://jelix.org/ns/dao/1.0">
+    <datasources>
+        <primarytable name="j" realname="resque_jobs" primarykey="job_id" />
+    </datasources>
+    <record>
+        <property name="job_id" fieldname="job_id" datatype="string" maxlength="60"/>
+        <property name="class" fieldname="class" datatype="string" required="yes"  maxlength="150"/>
+        <property name="queue" fieldname="queue" datatype="string" required="yes"  maxlength="150"/>
+        <property name="args" fieldname="args" datatype="TEXT"/>
+
+        <property name="status" fieldname="status" datatype="tinyint" required="yes" default="0"/>
+        <property name="enqueue_date" fieldname="enqueue_date" datatype="datetime"/>
+        <property name="delayed_date" fieldname="delayed_date" datatype="datetime"/>
+        <property name="start_perform_date" fieldname="start_perform_date" datatype="datetime"/>
+        <property name="end_perform_date" fieldname="end_perform_date" datatype="datetime"/>
+
+        <property name="failure_message" fieldname="failure_message" datatype="TEXT"/>
+
+        <property name="metadata" fieldname="metadata" datatype="TEXT"/>
+
+        <property name="progress_count" fieldname="progress_count" datatype="int" required="yes" default="0"/>
+        <property name="progress_message" fieldname="progress_message" datatype="TEXT"/>
+        <property name="progress_date" fieldname="progress_date" datatype="datetime"/>
+    </record>
+    <factory>
+
+    </factory>
+</dao>
