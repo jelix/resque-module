@@ -7,7 +7,7 @@
  * @see        http://www.jelix.org
  * @licence     MIT
  */
-namespace Jelix\Resque;
+namespace Jelix\Resque\Worker;
 
 
 class ResqueFactory implements \Resque_Job_FactoryInterface
@@ -28,7 +28,7 @@ class ResqueFactory implements \Resque_Job_FactoryInterface
     }
 
 
-    public function AddAlias($alias, $className)
+    public function addAlias($alias, $className)
     {
         if ($className == '') {
             unset($this->classAliases[$alias]);
@@ -75,7 +75,7 @@ class ResqueFactory implements \Resque_Job_FactoryInterface
             );
         }
 
-        if (is_subclass_of($className, '\Jelix\Resque\JobInterface')) {
+        if (is_subclass_of($className, '\Jelix\Resque\Worker\JobInterface')) {
             $instance = new $className($args, $queue);
         }
         else {

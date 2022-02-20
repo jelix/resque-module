@@ -11,7 +11,7 @@
 namespace Jelix\Resque\Command;
 
 
-use Jelix\Resque\ResqueFactory;
+use Jelix\Resque\Worker\ResqueFactory;
 
 class ResqueCommand extends ResqueCommandAbstract
 {

@@ -5,7 +5,7 @@ Jobs are piece of code that will be executed by a Resque worker.
 
 With Php-resque, Jobs are implemented into classes that should implement the  `Resque_JobInterface` interface
 (which declares the `perform()` method).
-In the Resque module, you can also implement Jobs into classes that implements the `\Jelix\Resque\JobInterface`, which inherits from
+In the Resque module, you can also implement Jobs into classes that implements the `\Jelix\Resque\Worker\JobInterface`, which inherits from
 the  `Resque_JobInterface` interface. The `JobInterface` interface adds a constructor accepting parameters for the job
 and the queue name.
 
@@ -14,7 +14,7 @@ Here is an example of a job, which add two numbers, given by the client code, an
 ```php
 namespace \My\Module\Jobs;
 
-class Addition implements \Jelix\Resque\JobInterface
+class Addition implements \Jelix\Resque\Worker\JobInterface
 {
     protected $firstOperand = 0;
     protected $secondOperand = 0;
@@ -57,7 +57,7 @@ class myModuleListener extends jEventListener
 {
     public function onResqueRegisterJobClasses($event)
     {
-        /** @var \Jelix\Resque\ResqueFactory */
+        /** @var \Jelix\Resque\Worker\ResqueFactory */
         $factory = $event->factory;
         $factory->addAlias('Addition', '\My\Module\Jobs\Addition');
     }
@@ -85,7 +85,7 @@ class myModuleListener extends jEventListener
 {
     public function onResqueRegisterJobClasses($event)
     {
-        /** @var \Jelix\Resque\ResqueFactory */
+        /** @var \Jelix\Resque\Worker\ResqueFactory */
         $factory = $event->factory;
         
         if ($event->queue == 'calculus') {

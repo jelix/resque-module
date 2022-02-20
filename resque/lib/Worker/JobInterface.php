@@ -7,7 +7,7 @@
  * @see        http://www.jelix.org
  * @licence     MIT
  */
-namespace Jelix\Resque;
+namespace Jelix\Resque\Worker;
 
 
 interface JobInterface extends \Resque_JobInterface

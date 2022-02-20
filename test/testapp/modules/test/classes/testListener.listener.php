@@ -10,7 +10,7 @@ class testListenerListener extends jEventListener
 {
     public function onResqueRegisterJobClasses($event)
     {
-        /** @var \Jelix\Resque\ResqueFactory */
+        /** @var \Jelix\Resque\Worker\ResqueFactory */
         $factory = $event->factory;
         $factory->addAlias('Addition', '\Jelix\ResqueTest\Jobs\Addition');
     }

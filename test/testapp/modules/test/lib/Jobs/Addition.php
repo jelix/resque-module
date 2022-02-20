@@ -11,7 +11,7 @@
 namespace Jelix\ResqueTest\Jobs;
 
 
-use Jelix\Resque\JobInterface;
+use Jelix\Resque\Worker\JobInterface;
 
 class Addition implements JobInterface
 {
