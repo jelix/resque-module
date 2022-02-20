@@ -39,14 +39,14 @@ class ResqueFactory implements \Resque_Job_FactoryInterface
     }
 
     /**
-     * Register jobs classes given by modules, listening the event ResqueRegisterJobClasses
+     * Register jobs classes given by modules, listening the event ResqueWorkerRegisterJobClasses
      *
      * Each listener should return a list, with key being an alias, and values being class names
      * @return void
      */
     public function registerModuleJobs($queue)
     {
-        \jEvent::notify('ResqueRegisterJobClasses', array('factory'=>$this, 'queue'=>$queue));
+        \jEvent::notify('ResqueWorkerRegisterJobClasses', array('factory'=>$this, 'queue'=>$queue));
     }
 
     /**

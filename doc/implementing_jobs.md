@@ -47,7 +47,7 @@ The Resque module provides a factory for Php-resque which allows declaring alias
 names than class name. So you can launch jobs using aliases instead of class names.
 
 To declare such aliases, you must implement a jEvent listener, that will call the `addAlias` method of the factory.
-The event name is `ResqueRegisterJobClasses`.
+The event name is `ResqueWorkerRegisterJobClasses`.
 
 First, create a listener in your module, for example `myModuleListener`, into a file `classes/myModule.listener.php`.
 It contains this class, which declares a job named `Addition`, implemented into a class `\My\Module\Jobs\Addition`.
@@ -55,7 +55,7 @@ It contains this class, which declares a job named `Addition`, implemented into 
 ```php
 class myModuleListener extends jEventListener
 {
-    public function onResqueRegisterJobClasses($event)
+    public function onResqueWorkerRegisterJobClasses($event)
     {
         /** @var \Jelix\Resque\Worker\ResqueFactory */
         $factory = $event->factory;
@@ -70,12 +70,12 @@ Then declare the listener into the `events.xml` of the module:
 <?xml version="1.0" encoding="UTF-8"?>
 <events xmlns="http://jelix.org/ns/events/1.0">
     <listener name="myModule">
-        <event name="ResqueRegisterJobClasses" />
+        <event name="ResqueWorkerRegisterJobClasses" />
     </listener>
 </events>
 ```
 
-When the worker will be started, the event `ResqueRegisterJobClasses` will be triggered, and then
+When the worker will be started, the event `ResqueWorkerRegisterJobClasses` will be triggered, and then
 all job classes will be declared into the worker.
 
 You can declare classes, depending on the queue used for the worker. The queue is given on the event object.
@@ -83,7 +83,7 @@ You can declare classes, depending on the queue used for the worker. The queue i
 ```php
 class myModuleListener extends jEventListener
 {
-    public function onResqueRegisterJobClasses($event)
+    public function onResqueWorkerRegisterJobClasses($event)
     {
         /** @var \Jelix\Resque\Worker\ResqueFactory */
         $factory = $event->factory;
