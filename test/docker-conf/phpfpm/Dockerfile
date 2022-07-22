@@ -1,4 +1,4 @@
-FROM 3liz/liz-php-fpm:7.4
+FROM 3liz/liz-php-fpm:8.1
 
 RUN apt-get -y install \
     supervisor \
