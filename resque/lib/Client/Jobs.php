@@ -85,7 +85,7 @@ class Jobs
             return null;
         }
 
-        return $jobRec->job_id;
+        return $jobRec->status;
     }
 
     static public function deleteJobHistory($jobId)
