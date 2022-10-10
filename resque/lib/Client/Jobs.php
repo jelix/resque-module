@@ -37,7 +37,7 @@ class Jobs
             return false;
         }
 
-        $dao = \jDao::get('resque~resque_jobs');
+        $dao = \jDao::get('resque~resque_jobs', 'resque');
         $rec = $dao->createRecord();
         $rec->job_id = $jobId;
         $rec->class = $class;
@@ -64,7 +64,7 @@ class Jobs
      */
     static public function getJob($jobId)
     {
-        $dao = \jDao::get('resque~resque_jobs');
+        $dao = \jDao::get('resque~resque_jobs', 'resque');
         $jobRec = $dao->get($jobId);
         if (!$jobRec) {
             return null;
@@ -90,7 +90,7 @@ class Jobs
 
     static public function deleteJobHistory($jobId)
     {
-        $dao = \jDao::get('resque~resque_jobs');
+        $dao = \jDao::get('resque~resque_jobs', 'resque');
         $dao->delete($jobId);
     }
 

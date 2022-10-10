@@ -30,7 +30,7 @@ class JobStatusManager
 
     static public function updateStatusToStart(\Resque_Job $job)
     {
-        $dao = \jDao::get('resque~resque_jobs');
+        $dao = \jDao::get('resque~resque_jobs', 'resque');
         $jobId = $job->payload['id'];
         $jobRec = $dao->get($jobId);
         if (!$jobRec) {
@@ -54,7 +54,7 @@ class JobStatusManager
      */
     static public function updateStatusToProgress($jobId, $progressCount, $progressMessage)
     {
-        $dao = \jDao::get('resque~resque_jobs');
+        $dao = \jDao::get('resque~resque_jobs', 'resque');
         $jobRec = $dao->get($jobId);
         if (!$jobRec) {
             return;
@@ -69,7 +69,7 @@ class JobStatusManager
 
     static public function updateStatusToSuccess(\Resque_Job $job)
     {
-        $dao = \jDao::get('resque~resque_jobs');
+        $dao = \jDao::get('resque~resque_jobs', 'resque');
         $jobId = $job->payload['id'];
         $jobRec = $dao->get($jobId);
         if (!$jobRec) {
@@ -84,7 +84,7 @@ class JobStatusManager
 
     static public function updateStatusToFail(\Resque_Job $job, $exception)
     {
-        $dao = \jDao::get('resque~resque_jobs');
+        $dao = \jDao::get('resque~resque_jobs', 'resque');
         $jobId = $job->payload['id'];
         $jobRec = $dao->get($jobId);
         if (!$jobRec) {
