@@ -8,7 +8,7 @@
         <copyright>2021 Laurent Jouanneau</copyright>
     </info>
     <dependencies>
-        <jelix minversion="1.7.0" maxversion="1.7.*"/>
+        <jelix minversion="1.7.0" maxversion="1.8.*"/>
     </dependencies>
     <autoload>
         <psr4 namespace="\Jelix\Resque" dir="lib/"/>
