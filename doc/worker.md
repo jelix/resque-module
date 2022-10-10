@@ -41,3 +41,18 @@ You can indicate the profile to use with the `--profile` option:
 ```bash
 php console.php resque:server --profile=other
 ```
+
+Listening jobs statuses
+=======================
+
+Some events are triggered when the status of a job change.
+
+You can create a listener to react to these events.
+Both events have a `job` property which is a `Jelix\Resque\Job` object
+representing the job.
+
+- `ResqueWorkerJobStatus`: the given job have a new status. See the property `status` of the job.
+- `ResqueWorkerJobProgress`: The given job still have the `JobStatusManager::STATUS_RUNNING`
+  status, but it is in progress. See the properties `progress_date`,
+  `progress_count`, `progress_message` of the job.
+

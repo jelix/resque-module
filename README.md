@@ -1,5 +1,5 @@
-This is a module for Jelix, providing a worker to do async tasks, using
-php-resque..
+JelixResque is a module for Jelix, providing a worker to do async tasks, using
+php-resque.
 
 This module is for Jelix 1.7.x and higher.
 

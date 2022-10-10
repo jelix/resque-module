@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module xmlns="http://jelix.org/ns/module/1.0">
     <info id="resque@jelix.org" name="news">
-        <version date="2021-07-14">0.1.0-pre</version>
+        <version date="2022-10-10">0.1.0</version>
         <label lang="en_US">Resque module</label>
         <description lang="en_US"></description>
         <license>MIT</license>
-        <copyright>2021 Laurent Jouanneau</copyright>
+        <copyright>2021-2022 Laurent Jouanneau</copyright>
     </info>
     <dependencies>
         <jelix minversion="1.7.0" maxversion="1.8.*"/>
